@@ -4,14 +4,13 @@ from tqdm.auto import tqdm
 from torchvision import transforms
 from torchvision.utils import make_grid
 from torch.utils.data import DataLoader
-import matplotlib
+from fastai.vision.all import *
 
 import matplotlib.pyplot as plt
 from torch.utils.data import Dataset
 from PIL import Image
 
 torch.manual_seed(0)
-# matplotlib.use('TkAgg')
 
 
 
@@ -233,7 +232,8 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 gen_AB = Generator(dim_A, dim_B).to(device)
 
-pre_dict = torch.load('horse2zebra.pth', map_location=torch.device(device))
+path = Path()
+pre_dict = torch.load(path/'horse2zebra.pth', map_location=torch.device(device))
 gen_AB.load_state_dict(pre_dict['gen_AB'])
 
 transform = transforms.Compose([
